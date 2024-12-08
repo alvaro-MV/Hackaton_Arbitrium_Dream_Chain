@@ -10,15 +10,14 @@ import { Upload, Target, Gift, Sparkles } from "lucide-react";
 import Footer from "@/components/ui/footer";
 import Image from "next/image";
 import Link from "next/link";
-
-interface FormDream {
-  name_sleep: string;
-  dream_description: string;
-  dream_goals: string;
-  dream_reward_offered: string;
-}
+import { LocalStorageService } from "../storage/service.storage.dream";
+import { DreamDeployed } from "../deploy/service.deploy.dream";
 
 export default function DreamRegistryForm() {
+  const sotorage = new LocalStorageService();
+  const dreamDeployed = new DreamDeployed();
+  const router = useRouter(); // Hook para manejar la navegación
+
   const [dreamForm, setDreamForm] = useState<FormDream>({
     name_sleep: "",
     dream_description: "",
@@ -26,7 +25,6 @@ export default function DreamRegistryForm() {
     dream_reward_offered: "",
   });
 
-  const router = useRouter(); // Hook para manejar la navegación
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -38,11 +36,13 @@ export default function DreamRegistryForm() {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    localStorage.setItem("form-dream", JSON.stringify(dreamForm));
-    console.log(localStorage.getItem("form-dream")); // Aquí puedes enviar el estado al servidor o hacer lo que necesites
-    router.push("/success"); // Redirige a la página de éxito
+    const data = await dreamDeployed.write(30);
+    dreamForm.contract = data;
+    dreamForm.id = sotorage.saveFormDream(dreamForm).id;
+    console.log(sotorage.findFormDreamById(dreamForm.id!));
+    router.push('/success?id=${id}');
   };
 
   return (

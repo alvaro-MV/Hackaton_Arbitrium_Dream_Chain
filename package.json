@@ -2,6 +2,7 @@
   "name": "playground",
   "version": "1.0.0",
   "scripts": {
+    "dev": "cd frontend && npm run dev",
     "play": "npx tsx playground/index.ts",
     "frontend": "cd frontend && npm run dev",
     "postinstall": "cd frontend && npm install"
@@ -10,10 +11,13 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "better-sqlite3": "^11.7.0",
     "viem": "^2.21.54"
   },
   "devDependencies": {
+    "@types/better-sqlite3": "^7.6.12",
     "@types/node": "^22.10.1",
-    "dotenv": "^16.4.7"
+    "dotenv": "^16.4.7",
+    "typescript": "^5.7.2"
   }
 }
