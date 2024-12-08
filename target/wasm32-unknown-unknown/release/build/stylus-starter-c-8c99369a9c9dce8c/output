@@ -1,0 +1,5 @@
+cargo:rerun-if-changed=build.rs
+cargo:rerun-if-changed=/source/target/wasm32-unknown-unknown/release/deps/stylus_starter_c.wasm
+cargo:rerun-if-changed=target/wasm32-unknown-unknown/release/deps/stylus_starter_c.wasm
+cargo:warning=Failed to create target directory /source/target/wasm32-unknown-unknown/release/deps: Permission denied (os error 13)
+cargo:rerun-if-changed=contract.wasm
