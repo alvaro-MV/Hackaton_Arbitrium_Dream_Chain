@@ -6,7 +6,7 @@ import { exit } from "process"
 import { log } from "console"
 
 const ABI = parseAbi([
-  "function set_value(uint256) public",
+  "function set_value(string) public",
   "function get_value() public view returns (uint256)",
 ])
 
@@ -26,19 +26,13 @@ const publicClient = createPublicClient({
 
 const CONT_ADD = (process as any).env.CONT_ADD;
 
-async function write(age: number) {
-  if (age < 0 || age > 255) {
-    throw new Error("Age must be a number between 0 and 255.");
-  }
-
-
-
+async function write(desc:string) {
   const result = await client.writeContract({
     abi: ABI,
     address: CONT_ADD,
     functionName: 'set_value',
     args: [
-      BigInt(age)
+      desc
     ], // Passing the age as an array of bytes
   });
 
@@ -56,6 +50,6 @@ async function read() {
 }
 
 // Example: Writing and Reading the age value (replace with actual age)
-const age = 30; // Example client age
-// write(age); // Write client age to contract
+const age = 5497834954795765; // Example client age
+write(String(age)); 
 read(); // Read client age from contract

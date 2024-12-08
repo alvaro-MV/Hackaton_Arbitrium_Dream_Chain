@@ -2,6 +2,7 @@
 #include "../stylus-sdk-c/include/stylus_utils.h"
 #include "../stylus-sdk-c/include/storage.h"
 #include "../stylus-sdk-c/include/string.h"
+#include <stdio.h>
 
 #define STORAGE_SLOT__value 0x0
 
@@ -15,7 +16,7 @@ uint8_t buf_out[32];
 // succeed and return a bebi32
 ArbResult inline _return_success_bebi32(bebi32 const retval)
 {
-  ArbResult res = {Success, retval, 32};
+  ArbResult res = {Success, retval, 90};
   return res;
 }
 
@@ -25,13 +26,13 @@ ArbResult set_value(uint8_t *input, size_t len)
   if (len != 32)
   {
     // revert if input length is not 32 bytes
-    return _return_short_string(Failure, "InvalidLength");
+    return _return_short_string(Failure, "Me voy a cagar en Diossssssssss");
   }
 
   uint8_t *slot_address = (uint8_t *)(STORAGE_SLOT__value + 0); // Get the slot address
 
   // Allocate a temporary buffer to store the input
-  storage_cache_bytes32(slot_address, input);
+  storage_cache_bytes32(0x1, input);
 
   // Flush the cache to store the value permanently
   storage_flush_cache(false);
@@ -41,7 +42,7 @@ ArbResult set_value(uint8_t *input, size_t len)
 ArbResult get_value(uint8_t *input, size_t len)
 {
 
-  uint8_t *slot_address = (uint8_t *)(STORAGE_SLOT__value + 0); // Get the slot address
+  uint8_t *slot_address = (uint8_t *)(0x85); // Get the slot address
 
   storage_load_bytes32(slot_address, buf_out);
   if (bebi32_is_zero(buf_out))
@@ -68,7 +69,6 @@ int handler(size_t argc)
       {to_function_selector("set_value(uint256)"), set_value},
       {to_function_selector("get_value()"), get_value},
   };
-
   uint32_t signature = *((uint32_t *)argv); // Parse function selector
 
   // Call the function based on the signature
@@ -76,6 +76,7 @@ int handler(size_t argc)
                                 sizeof(registry) / sizeof(registry[0]),
                                 signature, argv + 4, argc - 4 // Exclude the selector from calldata
   );
+  printf("res:out: %s\n", (char *) res.output);
   return (write_result(res.output, res.output_len), res.status);
 }
 
