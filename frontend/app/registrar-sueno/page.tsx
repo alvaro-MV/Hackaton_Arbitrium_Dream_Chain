@@ -1,11 +1,12 @@
 "use client";
 
-import { Card, CardContent, CardHeader, CardFooter } from "@/components/ui/card";
+import { useState } from "react";
+import { useRouter } from "next/navigation"; // Usa el módulo correcto
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Input } from "../components/ui/input";
 import { Button } from "../components/ui/button";
 import { Label } from "../components/ui/label";
 import { Upload, Target, Gift, Sparkles } from "lucide-react";
-import React, { useState } from "react";
 import Footer from "@/components/ui/footer";
 import Image from "next/image";
 import Link from "next/link";
@@ -25,6 +26,8 @@ export default function DreamRegistryForm() {
     dream_reward_offered: "",
   });
 
+  const router = useRouter(); // Hook para manejar la navegación
+
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
@@ -39,6 +42,7 @@ export default function DreamRegistryForm() {
     e.preventDefault();
     localStorage.setItem("form-dream", JSON.stringify(dreamForm));
     console.log(localStorage.getItem("form-dream")); // Aquí puedes enviar el estado al servidor o hacer lo que necesites
+    router.push("/success"); // Redirige a la página de éxito
   };
 
   return (
@@ -155,7 +159,11 @@ export default function DreamRegistryForm() {
               />
             </div>
 
-            <Button className="w-full text-lg py-6" size="lg" onClick={handleSubmit}>
+            <Button
+              className="w-full text-lg py-6"
+              size="lg"
+              onClick={handleSubmit}
+            >
               Registrar en Blockchain
             </Button>
           </CardContent>

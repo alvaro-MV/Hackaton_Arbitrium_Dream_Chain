@@ -1,35 +1,38 @@
-# Arbitrum Stylus Starter Template for C
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Register and Storage Slots
+## Getting Started
 
-Storage slots are pretty similar to registers in 32bit architectures.
-Since both have:
+First, run the development server:
 
-1. Fixed Size: Storage slots in Ethereum can hold exactly 32 bytes. Similar to how registers have a fixed size in assembly (e.g., 32-bit, 64-bit).
+IMPORTANT -> npm install
 
-2. Direct Addressing: Just as you access a specific register by its identifier (eax, r1), you access storage slots using their indexes: 0x01, 0x02.
+```bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
+```
 
-3. Explicit Management: Like assembly programming, developers must explicitly manage how storage slots are allocated and used. Miss assignment of memory/slots can cause data corruption.
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-## Requisitos
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-- Brew (Mac) / Chocolatey (Windows)
-- Docker (Docker Desktop)
-- rust, cargo y rustup
-- LLVM (con wasm-ld): Disponible desde la versión 15 (`llvm@15`)
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-## Verificar si tenemos `wasm-strip` instalado
+## Learn More
 
-Si no, podemos instalarlo con `brew install wabt`
+To learn more about Next.js, take a look at the following resources:
 
-## Instalando Cargo Stylus
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-- fork / git clone de este repositorio
-- `git submodule update --init --recursive`
-- `cargo install cargo-stylus`
-- `rustup target add wasm32-unknown-unknown` (**opcional**, solventa un error de target wasm32 not found al hacer make)
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-## Validar entorno de desarollo
+## Deploy on Vercel
 
-- `make` para generar el archivo contract.wasm
-- `cargo stylus check --wasm-file ./contract.wasm -e https://sepolia-rollup.arbitrum.io/rpc` (si tenemos output en verde estamos listos 🚀🚀)
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
