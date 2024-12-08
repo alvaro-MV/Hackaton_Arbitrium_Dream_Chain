@@ -12,6 +12,8 @@
   "license": "ISC",
   "dependencies": {
     "better-sqlite3": "^11.7.0",
+    "browserify-fs": "^1.0.0",
+    "fs": "^0.0.1-security",
     "viem": "^2.21.54"
   },
   "devDependencies": {
