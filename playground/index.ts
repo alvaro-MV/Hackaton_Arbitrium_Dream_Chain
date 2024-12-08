@@ -57,5 +57,5 @@ async function read() {
 
 // Example: Writing and Reading the age value (replace with actual age)
 const age = 30; // Example client age
-write(age); // Write client age to contract
+// write(age); // Write client age to contract
 read(); // Read client age from contract
