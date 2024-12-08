@@ -41,10 +41,10 @@ export default function DreamRegistryForm() {
 
     const deploy = new DeployDream();
     deploy.deployContract();
-    const data = await dreamDeployed.write(30);
-    dreamForm.contract = data;
-    dreamForm.id = sotorage.saveFormDream(dreamForm).id;
-    console.log(sotorage.findFormDreamById(dreamForm.id!));
+    //const data = await dreamDeployed.write(30);
+   // dreamForm.contract = data;
+    //dreamForm.id = sotorage.saveFormDream(dreamForm).id;
+    //console.log(sotorage.findFormDreamById(dreamForm.id!));
     router.push('/success?id=${id}');
   };
 
