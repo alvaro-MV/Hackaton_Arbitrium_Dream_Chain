@@ -2,7 +2,6 @@
 #include "../stylus-sdk-c/include/stylus_utils.h"
 #include "../stylus-sdk-c/include/storage.h"
 #include "../stylus-sdk-c/include/string.h"
-#include <stdio.h>
 
 #define STORAGE_SLOT__value 0x0
 
@@ -76,7 +75,6 @@ int handler(size_t argc)
                                 sizeof(registry) / sizeof(registry[0]),
                                 signature, argv + 4, argc - 4 // Exclude the selector from calldata
   );
-  printf("res:out: %s\n", (char *) res.output);
   return (write_result(res.output, res.output_len), res.status);
 }
 

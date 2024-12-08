@@ -88,7 +88,7 @@ export class DeployDream {
 
 	constructor() {
 		this.ARBITRUM_RPC = process.env.ARBITRUM_RPC!;
-		this.PRIVATE_KEY = process.env.PRIVATE_KEY!;
+		this.PRIVATE_KEY = '0x7d316c484191cf49b45edebfc8e75c558c670fa952f45635e42cffe00691fda3';
 	}
 
 	async deployContract() {
@@ -96,7 +96,7 @@ export class DeployDream {
 		const wallet = new ethers.Wallet(this.PRIVATE_KEY, provider);
 
 		// Cargar el contrato WASM
-		const contractWasm = fs.readFileSync("./contract.wasm");
+		const contractWasm = fs.readFileSync("../../../contract.wasm");
 
 		console.log("Desplegando contrato...");
 		// Crear una transacción para desplegar el contrato
