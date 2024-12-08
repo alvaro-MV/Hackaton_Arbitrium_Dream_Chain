@@ -11,7 +11,7 @@ import Footer from "@/components/ui/footer";
 import Image from "next/image";
 import Link from "next/link";
 import { LocalStorageService } from "../storage/service.storage.dream";
-import { DreamDeployed } from "../deploy/service.deploy.dream";
+import { DeployDream, DreamDeployed } from "../deploy/service.deploy.dream";
 
 export default function DreamRegistryForm() {
   const sotorage = new LocalStorageService();
@@ -38,6 +38,9 @@ export default function DreamRegistryForm() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    const deploy = new DeployDream();
+    deploy.deployContract();
     const data = await dreamDeployed.write(30);
     dreamForm.contract = data;
     dreamForm.id = sotorage.saveFormDream(dreamForm).id;
