@@ -7,10 +7,12 @@ import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
 import { Progress } from "@/components/ui/progress";
 import Link from "next/link";
 import Image from "next/image";
-import { FormDream } from "../interface/interface.formdata";
+import { Dream } from "../interface/interface.formdata";
+import { LocalStorageService } from "../storage/storage.dream";
+import { useEffect, useState } from "react";
 
 export default function PublicDreams() {
-  const formDreams: FormDream[]= [{
+  const [formDreams, setFormDreams] = useState<Dream[]>([{
     id: "1",
     name_dream: "Título del Sueño",
     dream_goals: "",
@@ -19,10 +21,18 @@ export default function PublicDreams() {
     contract: "",
     goal_mount: 4,
     donated_amount: 1
-    }
-  ];
+    }]);
+  const sotorage = new LocalStorageService();
 
-  
+  useEffect(() => {
+    // Llamamos a la función `getDreams` antes de construir el componente
+    const dreams = sotorage.getDreams();
+    console.log(dreams);
+    if (dreams.length)
+      setFormDreams(dreams); // Guardamos los datos en el estado
+  }, []); // El array vacío significa que solo se ejecutará una vez, al montar el componente
+
+
   return (
     <div className="min-h-screen flex flex-col bg-gray-100">
       {/* Header */}

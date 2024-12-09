@@ -18,7 +18,7 @@ export interface Mentor {
 	specialty: string,
 }
 
-export interface FormDream {
+export interface Dream {
 	id?: string;
 	name_dream: string;
 	dream_description: string;
