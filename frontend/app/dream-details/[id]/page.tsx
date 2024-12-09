@@ -65,7 +65,7 @@ export default function DreamDetailsPage() {
 	const clickDonor = async (e: React.FormEvent) =>{
 		e.preventDefault();
 		console.log("Writing contract...");
-		const result = await dreamService.write(10, dreams.contract);
+		const result =" await dreamService.write(10, dreams.contract)";
 		if (result)
 		{
 				console.log(`Result: ${result}`);
