@@ -3,14 +3,15 @@
 import { useRouter, useSearchParams  } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { LocalStorageService } from "../storage/service.storage.dream";
+import { LocalStorageService } from "../storage/storage.dream";
 
 export default function SuccessPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const serviceData = new LocalStorageService();
-  const id = searchParams.get("id");
-  const formData = serviceData.findFormDreamById(id ? id : "");
+  const id = searchParams?.get("id");
+  const formData = serviceData.findFormDreamById(id ? id : "fix");
+  console.log(id);
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100">
       <h1 className="text-3xl font-bold text-green-600 mb-4">

@@ -10,8 +10,10 @@ import { Upload, Target, Gift, Sparkles } from "lucide-react";
 import Footer from "@/components/ui/footer";
 import Image from "next/image";
 import Link from "next/link";
-import { LocalStorageService } from "../storage/service.storage.dream";
-import { DeployDream, DreamDeployed } from "../deploy/service.deploy.dream";
+import { LocalStorageService } from "../storage/storage.dream";
+import { DeployDream } from "../service/service.deploy.dream";
+import { DreamDeployed } from "../service/service.contract.dream";
+import { FormDream } from "../interface/interface.formdata";
 
 export default function DreamRegistryForm() {
   const sotorage = new LocalStorageService();
@@ -19,10 +21,13 @@ export default function DreamRegistryForm() {
   const router = useRouter(); // Hook para manejar la navegación
 
   const [dreamForm, setDreamForm] = useState<FormDream>({
-    name_sleep: "",
+    name_dream: "",
     dream_description: "",
     dream_goals: "",
     dream_reward_offered: "",
+    contract: "",
+    goal_mount : 1,
+    donated_amount: 2,
   });
 
 
@@ -40,12 +45,12 @@ export default function DreamRegistryForm() {
     e.preventDefault();
 
     const deploy = new DeployDream();
-    deploy.deployContract();
+    const contractAddress = await deploy.deployContract();
     //const data = await dreamDeployed.write(30);
-   // dreamForm.contract = data;
-    //dreamForm.id = sotorage.saveFormDream(dreamForm).id;
-    //console.log(sotorage.findFormDreamById(dreamForm.id!));
-    router.push('/success?id=${id}');
+    dreamForm.contract = contractAddress;
+    dreamForm.id = sotorage.saveFormDream(dreamForm).id;
+    console.log(sotorage.findFormDreamById(dreamForm.id!));
+    router.push(`/success?id=${dreamForm.id}`);
   };
 
   return (
@@ -101,7 +106,7 @@ export default function DreamRegistryForm() {
               <Input
                 id="dream-name"
                 name="name_sleep"
-                value={dreamForm.name_sleep}
+                value={dreamForm.name_dream}
                 onChange={handleChange}
                 placeholder="Escribe el nombre de tu sueño"
               />

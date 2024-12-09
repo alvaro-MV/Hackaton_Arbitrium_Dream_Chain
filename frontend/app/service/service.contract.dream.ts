@@ -1,13 +1,8 @@
+import "dotenv/config"
+import * as dotenv from "dotenv";
 import { createPublicClient, createWalletClient, getAbiItem, http, parseAbi } from "viem"
 import { arbitrumSepolia } from "viem/chains"
 import { privateKeyToAccount } from "viem/accounts"
-import "dotenv/config"
-import { exit } from "process"
-import { log } from "console"
-
-import { ethers } from "ethers";
-import * as fs from "fs";
-import * as dotenv from "dotenv";
 
 dotenv.config();
 
@@ -78,52 +73,4 @@ export class DreamDeployed {
 			console.error("Error reading from contract:", error);
 		}
 	}
-}
-
-
-export class DeployDream {
-	// Configuración de la red
-	private ARBITRUM_RPC;
-	private PRIVATE_KEY;
-
-	constructor() {
-		this.ARBITRUM_RPC = process.env.ARBITRUM_RPC!;
-		this.PRIVATE_KEY = '0x7d316c484191cf49b45edebfc8e75c558c670fa952f45635e42cffe00691fda3';
-	}
-
-	async deployContract() {
-		const provider = new ethers.JsonRpcProvider(this.ARBITRUM_RPC);
-		const wallet = new ethers.Wallet(this.PRIVATE_KEY, provider);
-
-		// Cargar el contrato WASM
-		const contractWasm = fs.readFileSync("../../../contract.wasm");
-
-		console.log("Desplegando contrato...");
-		// Crear una transacción para desplegar el contrato
-		const tx = await wallet.sendTransaction({
-		data: contractWasm.toString(), // El código WASM del contrato
-		});
-
-		const receipt = await tx.wait();
-		console.log("Contrato desplegado en:", receipt?.contractAddress);
-
-		return receipt?.contractAddress;
-	}
-
-	async interactWithContract(contractAddress: string) {
-		const provider = new ethers.JsonRpcProvider(this.ARBITRUM_RPC);
-		const wallet = new ethers.Wallet(this.PRIVATE_KEY, provider);
-
-		// Interactuar con el contrato (ejemplo de llamada)
-		console.log("Llamando a la función `add`...");
-		const tx = await wallet.sendTransaction({
-		to: contractAddress,
-		data: "0x1234...", // Reemplaza con los datos de la función codificados en ABI
-		});
-
-		const receipt = await tx.wait();
-		console.log("Resultado de la transacción:", receipt);
-	}
-
-
 }

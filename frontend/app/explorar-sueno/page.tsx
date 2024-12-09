@@ -7,8 +7,22 @@ import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
 import { Progress } from "@/components/ui/progress";
 import Link from "next/link";
 import Image from "next/image";
+import { FormDream } from "../interface/interface.formdata";
 
 export default function PublicDreams() {
+  const formDreams: FormDream[]= [{
+    id: "1",
+    name_dream: "Título del Sueño",
+    dream_goals: "",
+    dream_description: "  Breve descripción del sueño. Este es un ejemplo de cómo se vería la descripción en la tarjeta.",
+    dream_reward_offered: "",
+    contract: "",
+    goal_mount: 4,
+    donated_amount: 1
+    }
+  ];
+
+  
   return (
     <div className="min-h-screen flex flex-col bg-gray-100">
       {/* Header */}
@@ -70,22 +84,22 @@ export default function PublicDreams() {
 
         {/* Dreams Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {[1, 2, 3, 4, 5, 6].map((dream) => (
-            <Link key={dream} href={`/dream-details/${dream}`} passHref>
+          {formDreams.map((dream) => (
+            <Link key={dream.id} href={`/dream-details/${dream.id}`} passHref>
               <Card className="flex flex-col cursor-pointer hover:shadow-lg transition-shadow">
                 <CardHeader>
-                  <h2 className="text-lg font-bold">Título del Sueño {dream}</h2>
+                  <h2 className="text-lg font-bold">{dream.name_dream}</h2>
                 </CardHeader>
                 <CardContent className="flex-grow">
                   <p className="text-sm text-gray-600 mb-4">
-                    Breve descripción del sueño. Este es un ejemplo de cómo se vería la descripción en la tarjeta.
+                  { dream.dream_description}
                   </p>
                   <div className="space-y-2">
                     <div className="flex justify-between text-sm">
                       <span>Progreso</span>
-                      <span>65%</span>
+                      <span>{(dream.donated_amount / dream.goal_mount) * 100}%</span>
                     </div>
-                    <Progress value={65} className="w-full" />
+                    <Progress value={(dream.donated_amount / dream.goal_mount) * 100} className="w-full" />
                   </div>
                 </CardContent>
                 <CardFooter className="flex justify-between">

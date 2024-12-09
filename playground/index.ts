@@ -52,4 +52,4 @@ async function read() {
 // Example: Writing and Reading the age value (replace with actual age)
 const age = 5497834954795765; // Example client age
 write(String(age)); 
-read(); // Read client age from contract
+// read(); // Read client age from contract
