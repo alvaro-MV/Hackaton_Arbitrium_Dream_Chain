@@ -29,7 +29,7 @@ const CONT_ADD = (process as any).env.CONT_ADD;
 async function write(arg:number) {
   const result = await client.writeContract({
     abi: ABI,
-    address: CONT_ADD,
+    address: '0x6fB7A455a6b6d53371B311Dbf4c319f3F2B7F53e',
     functionName: 'set_value',
     args: [
       BigInt(arg)
@@ -42,7 +42,7 @@ async function write(arg:number) {
 async function read() {
   const result = await publicClient.readContract({
     abi: ABI,
-    address: CONT_ADD,
+    address: '0x6fB7A455a6b6d53371B311Dbf4c319f3F2B7F53e',
     functionName: "get_value",
   });
 
@@ -51,7 +51,7 @@ async function read() {
 
 // Example: Writing and Reading the age value (replace with actual age)
 const age = 10; // Example client age
-// write(age);
+//write(age);
 read(); // ReaGd client age from contract
 
 

@@ -37,14 +37,11 @@ export class DreamDeployed {
 		});
 	
 		// Dirección del contrato (obtenida de las variables de entorno)
-		this.CONT_ADD = '0x53a3badcf3a332f8393800e4ef9839b4618aceb8';
+		this.CONT_ADD = '0x8E3DC5098C7b97848F8667E9efFAaa242D2B352e';
 	}
 
 	// Función para escribir en el contrato (escribir un valor)
 	async write(age: number, cont_add?: string) : Promise<string> {
-		if (age < 0 || age > 255) {
-			throw new Error("Age must be a number between 0 and 255.");
-		}
 		try {
 			const result = await this.client.writeContract({
 			abi: this.ABI,
@@ -61,16 +58,18 @@ export class DreamDeployed {
 	}
 
 	// Función para leer el valor desde el contrato
-	async read() {
+	async read(cont_add?: string): Promise<string> {
 		try {
 			const result = await this.publicClient.readContract({
 			abi: this.ABI,
-			address: this.CONT_ADD,
+			address: cont_add? cont_add : this.CONT_ADD,
 			functionName: "get_value",
 			});
 			console.log(`Contract read result: ${result}`);
+			return result;
 		} catch (error) {
 			console.error("Error reading from contract:", error);
+			return "";
 		}
 	}
 }

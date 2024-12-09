@@ -60,7 +60,6 @@ export default function DreamDetailsPage() {
 		}
 	}, []); // El array vacío significa que solo se ejecutará una vez, al montar el componente
 
-
 	const clickDonor = async (e: React.FormEvent) =>{
 		e.preventDefault();
 		console.log("Writing contract...");
@@ -83,6 +82,9 @@ export default function DreamDetailsPage() {
 					address: result,
 					amount: randomMount,
 				};
+				const value_total = await dreamService.read(dreams.contract);
+
+				console.log(value_total);
 				setFormDreams((prevDreams) => {
 					const updatedDreams = {
 						...prevDreams,

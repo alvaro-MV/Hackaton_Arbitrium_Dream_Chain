@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import { Button } from "./components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Gift, Users, LineChart, Github, Twitter, Linkedin } from "lucide-react";
@@ -8,13 +8,28 @@ import Link from "next/link";
 import Image from "next/image";
 import { Team } from "@/components/ui/team";
 import { Testimonials } from "@/components/ui/testimonials"; // Importa el componente de testimonios
+import { readContract } from "viem/_types/actions/public/readContract";
+import { DreamDeployed } from "./service/service.contract.dream";
 
 function DreamChainLanding() {
+
+
+  const  readContract = async (e: React.FormEvent) => {
+    const contract = new DreamDeployed();
+    //const writeVal = await contract.write(10, '0x6fB7A455a6b6d53371B311Dbf4c319f3F2B7F53e');
+    //console.log (" Val write: ", writeVal)
+    const readva = await contract.read('0x6fB7A455a6b6d53371B311Dbf4c319f3F2B7F53e');
+    console.log("val read: ",readva);
+
+  }
+
+  
   return (
     <div className="min-h-screen flex flex-col bg-gray-100">
       <header className="py-6 px-4 border-b bg-white">
         <div className="container mx-auto flex justify-between items-center">
           <div className="flex items-center space-x-2">
+            <Button onClick={readContract}> Read Contract</Button>
             <Image
               src="/logo.png"
               alt="Logo de DreamChain"
