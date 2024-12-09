@@ -23,10 +23,17 @@ ArbResult inline _return_success_bebi32(bebi32 const retval)
 ArbResult set_value(uint8_t *input, size_t len)
 {
   uint8_t *slot_address = (uint8_t *)(STORAGE_SLOT__value); // Get the slot address
+<<<<<<< HEAD
+=======
+
+  storage_load_bytes32(slot_address, buf_out);
+
+>>>>>>> be56080 (amo)
 
   storage_load_bytes32(slot_address, buf_out);
   for (int i = 0; i < 32; i++) {
     buf_out[i] += input[i];
+    accumulated_value[i] += buf_out[i];
   }
     // Allocate a temporary buffer to store the input
   storage_cache_bytes32(slot_address, buf_out);
