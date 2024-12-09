@@ -26,7 +26,7 @@ export default function DreamRegistryForm() {
     dream_goals: "",
     dream_reward_offered: "",
     contract: "",
-    goal_mount : 1,
+    goal_mount : 1000,
     donated_mount: 2,
   });
 
@@ -110,6 +110,20 @@ export default function DreamRegistryForm() {
                 value={dreamForm.name_dream}
                 onChange={handleChange}
                 placeholder="Escribe el nombre de tu sueño"
+              />
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="amount-donation" className="text-lg font-medium">
+                <Sparkles className="inline-block mr-2" size={20} />
+                Monto Requerido 
+              </Label>
+              <Input
+                id="goal-donation"
+                name="goal_amount"
+                value={dreamForm.goal_mount}
+                onChange={handleChange}
+                placeholder="Fije la cantidad de dinero que requiere"
               />
             </div>
 
