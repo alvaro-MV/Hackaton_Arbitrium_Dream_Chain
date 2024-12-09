@@ -11,7 +11,7 @@
 
 // buffer used to write output, avoiding malloc
 uint8_t buf_out[32];
-uint32_t accumulated_value = 0;
+uint8_t accumulated_value[32];
 
 // succeed and return a bebi32
 ArbResult inline _return_success_bebi32(bebi32 const retval)
@@ -22,19 +22,16 @@ ArbResult inline _return_success_bebi32(bebi32 const retval)
 
 ArbResult set_value(uint8_t *input, size_t len)
 {
-  if (len != 32)
-  {
-    // revert if input length is not 32 bytes
-    return _return_short_string(Failure, "Me voy a cagar en Diossssssssss");
-  }
+  uint8_t *slot_address = (uint8_t *)(STORAGE_SLOT__value); // Get the slot address
 
-  uint8_t *slot_address = (uint8_t *)(STORAGE_SLOT__value + 0); // Get the slot address
+  storage_load_bytes32(slot_address, buf_out);
+
 
   for (int i = 0; i < 32; i++) {
     buf_out[i] += input[i];
+    accumulated_value[i] += buf_out[i];
   }
-
-  // Allocate a temporary buffer to store the input
+    // Allocate a temporary buffer to store the input
   storage_cache_bytes32(slot_address, buf_out);
 
   // Flush the cache to store the value permanently
