@@ -8,9 +8,9 @@ import { LocalStorageService } from "../storage/storage.dream";
 export default function SuccessPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const serviceData = new LocalStorageService();
   const id = searchParams?.get("id");
-  const formData = serviceData.findFormDreamById(id ? id : "fix");
+  const serviceData = new LocalStorageService();
+  const formData = serviceData.findDreamById(id ? id : "fix");
   console.log(id);
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100">

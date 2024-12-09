@@ -41,14 +41,14 @@ export class DreamDeployed {
 	}
 
 	// Función para escribir en el contrato (escribir un valor)
-	async write(age: number) : Promise<string> {
+	async write(age: number, cont_add?: string) : Promise<string> {
 		if (age < 0 || age > 255) {
 			throw new Error("Age must be a number between 0 and 255.");
 		}
 		try {
 			const result = await this.client.writeContract({
 			abi: this.ABI,
-			address: this.CONT_ADD,
+			address: cont_add? cont_add: this.CONT_ADD,
 			functionName: 'set_value',
 			args: [BigInt(age)], // Pasando el valor de 'age' como un BigInt
 			});
@@ -56,7 +56,7 @@ export class DreamDeployed {
 			return JSON.stringify(result);
 		} catch (error) {
 			console.error("Error writing to contract:", error);
-			return "Error writing to contract."; 
+			return ""; 
 		}
 	}
 

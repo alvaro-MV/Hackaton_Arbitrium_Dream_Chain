@@ -9,11 +9,13 @@ export interface Transactions {
 
 }
 export interface Donor {
+	name: string,
 	address: string,
 	mount: number,
 }
 
 export interface Mentor {
+	name: string,
 	address: string,
 	specialty: string,
 }
@@ -26,7 +28,7 @@ export interface Dream {
 	dream_reward_offered: string;
 	contract: string;
 	goal_mount : number;
-	donated_amount: number;
+	donated_mount: number;
 	donors?: Donor[];
 	mentors?: Mentor[];
   }

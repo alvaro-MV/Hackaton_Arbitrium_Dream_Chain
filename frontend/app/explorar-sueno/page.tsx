@@ -20,12 +20,11 @@ export default function PublicDreams() {
     dream_reward_offered: "",
     contract: "",
     goal_mount: 4,
-    donated_amount: 1
+    donated_mount: 1
     }]);
   const sotorage = new LocalStorageService();
 
   useEffect(() => {
-    // Llamamos a la función `getDreams` antes de construir el componente
     const dreams = sotorage.getDreams();
     console.log(dreams);
     if (dreams.length)
@@ -107,9 +106,9 @@ export default function PublicDreams() {
                   <div className="space-y-2">
                     <div className="flex justify-between text-sm">
                       <span>Progreso</span>
-                      <span>{(dream.donated_amount / dream.goal_mount) * 100}%</span>
+                      <span>{(dream.donated_mount / dream.goal_mount) * 100}%</span>
                     </div>
-                    <Progress value={(dream.donated_amount / dream.goal_mount) * 100} className="w-full" />
+                    <Progress value={(dream.donated_mount / dream.goal_mount) * 100} className="w-full" />
                   </div>
                 </CardContent>
                 <CardFooter className="flex justify-between">

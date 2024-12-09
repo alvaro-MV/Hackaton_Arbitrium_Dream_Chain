@@ -27,7 +27,7 @@ export default function DreamRegistryForm() {
     dream_reward_offered: "",
     contract: "",
     goal_mount : 1,
-    donated_amount: 2,
+    donated_mount: 2,
   });
 
 
@@ -105,7 +105,7 @@ export default function DreamRegistryForm() {
               </Label>
               <Input
                 id="dream-name"
-                name="name_sleep"
+                name="name_dream"
                 value={dreamForm.name_dream}
                 onChange={handleChange}
                 placeholder="Escribe el nombre de tu sueño"
