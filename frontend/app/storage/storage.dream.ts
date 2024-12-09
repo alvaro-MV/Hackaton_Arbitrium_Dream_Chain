@@ -22,6 +22,26 @@ export class LocalStorageService implements StorageService {
 		return dream;
 	}
   
+	updateDreamById(upDram: Dream): Dream | null {
+		let dreams = this.getDreams();
+		let dream: Dream | undefined;
+		if (dreams.length)
+		{
+			dreams = dreams.map(u => {
+				if (u.id !== upDram.id) {
+					u = upDram
+					return u;
+				}
+				return u
+			});
+			localStorage.setItem('dreams', JSON.stringify(dreams));
+			console.log("Dream encontrado:", dream);
+			
+		} else {
+			console.log("Dream not found: id", dream?.id);
+		}
+		return dream || null;
+	}
 	// Buscar un  dream por su id
 	findDreamById(id: string): Dream | null {
 	  const users = this.getDreams();

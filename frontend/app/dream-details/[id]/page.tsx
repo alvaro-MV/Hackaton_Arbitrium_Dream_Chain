@@ -92,6 +92,7 @@ export default function DreamDetailsPage() {
 					donors: [...(prevDreams.donors || []), donor], // Añade el nuevo donante al array existente
 				}));
 				setAllowDonation((dreams.donated_mount / dreams.goal_mount) >= 1);
+				sotorage.saveDream(dreams);
 				console.log(dreams)
 		}
 	}
@@ -126,6 +127,7 @@ export default function DreamDetailsPage() {
 					mentors: [...(prevDreams.mentors || []), mentor], // Añade el nuevo donante al array existente
 				}));
 				setAllowDonation((dreams.donated_mount / dreams.goal_mount) >= 1);
+				sotorage.saveDream(dreams);
 				console.log(dreams)
 		}
 	}

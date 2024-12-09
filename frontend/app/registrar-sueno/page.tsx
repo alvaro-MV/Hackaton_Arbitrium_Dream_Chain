@@ -30,7 +30,6 @@ export default function DreamRegistryForm() {
     donated_mount: 2,
   });
 
-
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
@@ -48,6 +47,8 @@ export default function DreamRegistryForm() {
     const contractAddress = await deploy.deployContract();
     //const data = await dreamDeployed.write(30);
     dreamForm.contract = contractAddress;
+    dreamForm.goal_mount = 100;
+    dreamForm.donated_mount = 0;
     dreamForm.id = sotorage.saveDream(dreamForm).id;
     console.log(sotorage.findDreamById(dreamForm.id!));
     router.push(`/success?id=${dreamForm.id}`);
