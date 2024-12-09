@@ -30,12 +30,12 @@ export default function DreamDetailsPage() {
 			{
 				name: "Donante 1",
 				address: "",
-				mount: 500,
+				amount: 500,
 			},
 			{
 				name: "Donante 2",
 				address: "",
-				mount: 350,
+				amount: 350,
 			}
 		],
 		mentors: [
@@ -83,15 +83,15 @@ export default function DreamDetailsPage() {
 				const donor: Donor = {
 					name: randomName,
 					address: randomAddress,
-					mount: randomMount,
+					amount: randomMount,
 				};
 				setFormDreams((prevDreams) => {
 					const updatedDreams = {
 						...prevDreams,
-						donated_mount: prevDreams.donated_amount + donor.mount,
+						donated_amount: prevDreams.donated_amount + donor.amount,
 						donors: [...(prevDreams.donors || []), donor], // Añade el nuevo donante al array existente
 					}
-					setAllowDonation((updatedDreams.donated_mount / updatedDreams.goal_amount) <= 1);
+					setAllowDonation((updatedDreams.donated_amount / updatedDreams.goal_amount) <= 1);
 					sotorage.updateDreamById(updatedDreams);
 					return updatedDreams;
 				});
@@ -251,7 +251,7 @@ export default function DreamDetailsPage() {
 										</Avatar>
 										<div>
 											<p className="font-semibold">{donor.name}</p>
-											<p className="text-sm text-gray-500">Cantidad: ${donor.mount}</p>
+											<p className="text-sm text-gray-500">Cantidad: ${donor.amount}</p>
 										</div>
 								 </li>
 								))}

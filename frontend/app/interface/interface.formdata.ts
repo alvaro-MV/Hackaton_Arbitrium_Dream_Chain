@@ -11,7 +11,7 @@ export interface Transactions {
 export interface Donor {
 	name: string,
 	address: string,
-	mount: number,
+	amount: number,
 }
 
 export interface Mentor {
