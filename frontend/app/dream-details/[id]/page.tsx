@@ -24,8 +24,8 @@ export default function DreamDetailsPage() {
 		dream_description: "  Breve descripción del sueño. Este es un ejemplo de cómo se vería la descripción en la tarjeta.",
 		dream_reward_offered: "",
 		contract: "",
-		goal_mount: 1000,
-		donated_mount: 850,
+		goal_amount: 1000,
+		donated_amount: 850,
 		donors: [
 			{
 				name: "Donante 1",
@@ -56,7 +56,7 @@ export default function DreamDetailsPage() {
 		const dreams = sotorage.findDreamById(id!);
 		if (dreams){
 			setFormDreams(dreams); // Guardamos los datos en el estado
-			setAllowDonation((dreams.donated_mount / dreams.goal_mount) < 1);
+			setAllowDonation((dreams.donated_amount / dreams.goal_amount) < 1);
 		}
 	}, []); // El array vacío significa que solo se ejecutará una vez, al montar el componente
 
@@ -88,10 +88,10 @@ export default function DreamDetailsPage() {
 				setFormDreams((prevDreams) => {
 					const updatedDreams = {
 						...prevDreams,
-						donated_mount: prevDreams.donated_mount + donor.mount,
+						donated_mount: prevDreams.donated_amount + donor.mount,
 						donors: [...(prevDreams.donors || []), donor], // Añade el nuevo donante al array existente
 					}
-					setAllowDonation((updatedDreams.donated_mount / updatedDreams.goal_mount) <= 1);
+					setAllowDonation((updatedDreams.donated_mount / updatedDreams.goal_amount) <= 1);
 					sotorage.updateDreamById(updatedDreams);
 					return updatedDreams;
 				});
@@ -167,8 +167,8 @@ export default function DreamDetailsPage() {
 						</CardHeader>
 						<CardContent>
 							<Progress 
-                value={ (dreams.donated_mount/ dreams.goal_mount)*100}  className="w-full" />
-							<p className="text-center mt-2">{(dreams.donated_mount/ dreams.goal_mount)*100}% Completado</p>
+                value={ (dreams.donated_amount/ dreams.goal_amount)*100}  className="w-full" />
+							<p className="text-center mt-2">{(dreams.donated_amount/ dreams.goal_amount)*100}% Completado</p>
 						</CardContent>
 					</Card>
 

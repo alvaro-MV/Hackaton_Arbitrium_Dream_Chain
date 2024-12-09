@@ -27,8 +27,8 @@ export interface Dream {
 	dream_goals: string;
 	dream_reward_offered: string;
 	contract: string;
-	goal_mount : number;
-	donated_mount: number;
+	goal_amount : number;
+	donated_amount: number;
 	donors?: Donor[];
 	mentors?: Mentor[];
   }

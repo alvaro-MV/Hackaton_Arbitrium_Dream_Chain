@@ -26,8 +26,8 @@ export default function DreamRegistryForm() {
     dream_goals: "",
     dream_reward_offered: "",
     contract: "",
-    goal_mount : 1000,
-    donated_mount: 2,
+    goal_amount : 1000,
+    donated_amount: 2,
   });
 
   const handleChange = (
@@ -47,8 +47,8 @@ export default function DreamRegistryForm() {
     const contractAddress = await deploy.deployContract();
     //const data = await dreamDeployed.write(30);
     dreamForm.contract = contractAddress;
-    dreamForm.goal_mount = 100;
-    dreamForm.donated_mount = 0;
+    dreamForm.goal_amount = 100;
+    dreamForm.donated_amount = 0;
     dreamForm.id = sotorage.saveDream(dreamForm).id;
     console.log(sotorage.findDreamById(dreamForm.id!));
     router.push(`/success?id=${dreamForm.id}`);
@@ -119,9 +119,9 @@ export default function DreamRegistryForm() {
                 Monto Requerido 
               </Label>
               <Input
-                id="goal-donation"
+                id="goal-amount"
                 name="goal_amount"
-                value={dreamForm.goal_mount}
+                value={dreamForm.goal_amount}
                 onChange={handleChange}
                 placeholder="Fije la cantidad de dinero que requiere"
               />
