@@ -54,7 +54,6 @@ export default function DreamDetailsPage() {
 	const [allowDonation, setAllowDonation] = useState<Boolean>(true);
 	useEffect(() => {
 		const dreams = sotorage.findDreamById(id!);
-		console.log(dreams);
 		if (dreams){
 			setFormDreams(dreams); // Guardamos los datos en el estado
 			setAllowDonation((dreams.donated_mount / dreams.goal_mount) < 1);
@@ -65,7 +64,7 @@ export default function DreamDetailsPage() {
 	const clickDonor = async (e: React.FormEvent) =>{
 		e.preventDefault();
 		console.log("Writing contract...");
-		const result =" await dreamService.write(10, dreams.contract)";
+		const result = await dreamService.write(10, dreams.contract);
 		if (result)
 		{
 				console.log(`Result: ${result}`);
@@ -78,7 +77,7 @@ export default function DreamDetailsPage() {
 				const randomAddress = addresses[Math.floor(Math.random() * addresses.length)];
 		
 				// Generar un monto aleatorio entre 0 y 1000
-				const randomMount = Math.floor(Math.random() * 1001);
+				const randomMount = Math.floor(Math.random() * 100);
 		
 				// Crear el donante
 				const donor: Donor = {
@@ -86,21 +85,23 @@ export default function DreamDetailsPage() {
 					address: randomAddress,
 					mount: randomMount,
 				};
-				setFormDreams((prevDreams) => ({
-					...prevDreams,
-					donated_mount: prevDreams.donated_mount + donor.mount,
-					donors: [...(prevDreams.donors || []), donor], // Añade el nuevo donante al array existente
-				}));
-				setAllowDonation((dreams.donated_mount / dreams.goal_mount) >= 1);
-				sotorage.saveDream(dreams);
-				console.log(dreams)
+				setFormDreams((prevDreams) => {
+					const updatedDreams = {
+						...prevDreams,
+						donated_mount: prevDreams.donated_mount + donor.mount,
+						donors: [...(prevDreams.donors || []), donor], // Añade el nuevo donante al array existente
+					}
+					setAllowDonation((updatedDreams.donated_mount / updatedDreams.goal_mount) <= 1);
+					sotorage.updateDreamById(updatedDreams);
+					return updatedDreams;
+				});
 		}
 	}
 
 	const clickMentor = async (e: React.FormEvent) =>{
 		e.preventDefault();
 		console.log("Writing contract...");
-		const result = "await dreamService.write(0, dreams.contract)";
+		const result = await dreamService.write(0, dreams.contract);
 		if (result)
 		{
 				console.log(`Result: ${result}`);
@@ -122,13 +123,16 @@ export default function DreamDetailsPage() {
 					address: randomAddress,
 					specialty: randomSpecialty,
 				};
-				setFormDreams((prevDreams) => ({
-					...prevDreams,
-					mentors: [...(prevDreams.mentors || []), mentor], // Añade el nuevo donante al array existente
-				}));
-				setAllowDonation((dreams.donated_mount / dreams.goal_mount) >= 1);
-				sotorage.saveDream(dreams);
-				console.log(dreams)
+				sotorage.updateDreamById(dreams);
+				setFormDreams((prevDreams) => {
+					const updatedDreams = {
+						...prevDreams,
+						mentors: [...(prevDreams.mentors || []), mentor],
+					}
+					sotorage.updateDreamById(updatedDreams);
+					return updatedDreams;
+				});
+				console.log("Mentor asignado");
 		}
 	}
 	return (

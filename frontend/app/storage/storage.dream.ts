@@ -7,6 +7,7 @@ export interface StorageService {
 	saveDream(user: Dream): void;
 	findDreamById(id: string): Dream | null;
 	deleteDreamById(id: string): void;
+	updateDreamById(upDram: Dream): Dream | null;
 	getDreams(): Dream[];
 }
 
@@ -23,25 +24,30 @@ export class LocalStorageService implements StorageService {
 	}
   
 	updateDreamById(upDram: Dream): Dream | null {
-		let dreams = this.getDreams();
-		let dream: Dream | undefined;
-		if (dreams.length)
-		{
-			dreams = dreams.map(u => {
-				if (u.id !== upDram.id) {
-					u = upDram
-					return u;
-				}
-				return u
-			});
-			localStorage.setItem('dreams', JSON.stringify(dreams));
-			console.log("Dream encontrado:", dream);
-			
-		} else {
-			console.log("Dream not found: id", dream?.id);
+		// Obtén todos los sueños almacenados
+		const dreams = this.getDreams();
+	  
+		// Verifica si el sueño con el ID proporcionado existe
+		const dreamExists = dreams.some((dream) => dream.id === upDram.id);
+		if (!dreamExists) {
+		  console.error(`Dream con ID ${upDram.id} no encontrado.`);
+		  return null;
 		}
-		return dream || null;
-	}
+	  
+		// Actualiza el sueño específico
+		const updatedDreams = dreams.map((dream) => {
+		  if (dream.id === upDram.id) {
+			return { ...dream, ...upDram }; // Mezcla los datos existentes con los nuevos
+		  }
+		  return dream;
+		});
+	  
+		// Guarda los sueños actualizados en el LocalStorage
+		localStorage.setItem('dreams', JSON.stringify(updatedDreams));
+		console.log("Dream actualizado:", upDram);
+		return upDram;
+	  }
+	  
 	// Buscar un  dream por su id
 	findDreamById(id: string): Dream | null {
 	  const users = this.getDreams();
@@ -65,7 +71,6 @@ export class LocalStorageService implements StorageService {
 	// Obtener todos los  dreams desde LocalStorage
 	getDreams(): Dream[] {
 	  const users = localStorage.getItem('dreams');
-	  console.log(users);
 	  return users ? JSON.parse(users) : [];
 	}
   }
