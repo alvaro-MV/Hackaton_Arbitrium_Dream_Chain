@@ -70,19 +70,17 @@ export default function DreamDetailsPage() {
 				console.log(`Result: ${result}`);
 				//Debe llamar a un cuestionario para hacer la donacion.
 				const names = ["Alice", "Bob", "Charlie", "Diana", "Eve"];
-				const addresses = ["0x123", "0x456", "0x789", "0xABC", "0xDEF"];
 		
 				// Seleccionar aleatoriamente un nombre y una dirección
 				const randomName = names[Math.floor(Math.random() * names.length)];
-				const randomAddress = addresses[Math.floor(Math.random() * addresses.length)];
 		
 				// Generar un monto aleatorio entre 0 y 1000
-				const randomMount = Math.floor(Math.random() * 100);
+				const randomMount = Math.floor(Math.random() * dreams.goal_amount);
 		
 				// Crear el donante
 				const donor: Donor = {
 					name: randomName,
-					address: randomAddress,
+					address: result,
 					amount: randomMount,
 				};
 				setFormDreams((prevDreams) => {
