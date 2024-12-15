@@ -6,7 +6,6 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import Link from "next/link";
-import Image from "next/image";
 import { Dream } from "../interface/interface.formdata";
 import { LocalStorageService, StorageService } from "../storage/storage.dream";
 import { useEffect, useState } from "react";
