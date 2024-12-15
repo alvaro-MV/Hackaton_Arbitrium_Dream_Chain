@@ -36,5 +36,42 @@ export class DeployDream {
 			return "";
 			}
 	}
+	async deployContractMetaMask(): Promise<string> {
+		if (typeof window.ethereum === "undefined") {
+			alert("MetaMask no está instalado. Por favor, instálalo para continuar.");
+			return "";
+		  }
+		try {
+			const [account] = await window.ethereum.request({
+				method: "eth_requestAccounts",
+			});
+
+			const response = await fetch("/api/deploy-metamask", {
+				method: "POST",
+			});
+			if (!response.ok) {
+				throw new Error("Error al desplegar el contrato");
+			}
+			const data = await response.json();
+
+			// Desplegar el contrato
+			const provider = new ethers.BrowserProvider(window.ethereum);	
+			const signer = await provider.getSigner();
+
+			const tx = {
+				from: account,
+				data: data.data,
+			};
+			
+			console.log("Desplegando contrato...");
+			const txResponse = await signer.sendTransaction(tx);
+
+			const receipt = await txResponse.wait();
+			return receipt?.contractAddress?.toString() || "";
+		} catch (error) {
+			console.error("Error al llamar a la API:", error);
+			return "";
+		}
+	}
 }
 

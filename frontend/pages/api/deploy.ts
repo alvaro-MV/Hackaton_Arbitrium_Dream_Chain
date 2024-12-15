@@ -31,7 +31,7 @@ import { ethers } from "ethers";
 		  res.status(500).json({ error: error });
 		}
 	} else {
-	res.setHeader("Allow", ["POST"]);
-	res.status(405).end(`Method ${req.method} Not Allowed`);
+		res.setHeader("Allow", ["POST"]);
+		res.status(405).end(`Method ${req.method} Not Allowed`);
 	}
 }

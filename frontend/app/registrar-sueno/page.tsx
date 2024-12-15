@@ -44,7 +44,7 @@ export default function DreamRegistryForm() {
     e.preventDefault();
 
     const deploy = new DeployDream();
-    const contractAddress = await deploy.deployContract();
+    const contractAddress = await deploy.deployContractMetaMask();
     //const data = await dreamDeployed.write(30);
     dreamForm.contract = contractAddress;
     dreamForm.goal_amount = 100;

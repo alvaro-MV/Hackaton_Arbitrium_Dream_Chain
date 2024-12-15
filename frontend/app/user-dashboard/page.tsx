@@ -22,6 +22,7 @@ export default function UserDashboard() {
           method: "eth_requestAccounts",
         });
         // Asigna la cuenta conectada al estado
+        console.log(accounts);
         setAccount(accounts[0]);
       } catch (error) {
         console.error("Error conectando con MetaMask:", error);
