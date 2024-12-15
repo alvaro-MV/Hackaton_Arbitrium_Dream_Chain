@@ -14,6 +14,7 @@ import { LocalStorageService } from "../storage/storage.dream";
 import { DeployDream } from "../service/service.deploy.dream";
 import { DreamDeployed } from "../service/service.contract.dream";
 import { Dream } from "../interface/interface.formdata";
+import Header from "@/components/ui/Header";
 
 export default function DreamRegistryForm() {
   const sotorage = new LocalStorageService();
@@ -71,40 +72,7 @@ export default function DreamRegistryForm() {
   return (
     <div className="min-h-screen flex flex-col bg-gray-100">
       {/* Header */}
-      <header className="py-6 px-4 border-b bg-white">
-        <div className="container mx-auto flex justify-between items-center">
-          <div className="flex items-center space-x-2">
-            <Image
-              src="/logo.png"
-              alt="Logo de DreamChain"
-              width={70}
-              height={70}
-              className="rounded-full"
-            />
-            <span className="text-2xl font-bold">DreamChain</span>
-          </div>
-          <nav className="hidden md:flex space-x-4">
-            <Link
-              href="/"
-              className="px-4 py-2 text-lg font-medium rounded-md hover:bg-gray-100"
-            >
-              Inicio
-            </Link>
-            <Link
-              href="how-it-works"
-              className="px-4 py-2 text-lg font-medium rounded-md hover:bg-gray-100"
-            >
-              Cómo funciona
-            </Link>
-            <Link
-              href="user-dashboard"
-              className="px-4 py-2 text-lg font-medium rounded-md hover:bg-gray-100"
-            >
-              Perfil
-            </Link>
-          </nav>
-        </div>
-      </header>
+      <Header></Header>
 
       {/* Main Content */}
       <div className="container mx-auto px-4 py-8 flex-grow">

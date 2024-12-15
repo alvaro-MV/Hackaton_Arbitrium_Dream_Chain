@@ -10,54 +10,13 @@ import { Team } from "@/components/ui/team";
 import { Testimonials } from "@/components/ui/testimonials"; // Importa el componente de testimonios
 import { readContract } from "viem/_types/actions/public/readContract";
 import { DreamDeployed } from "./service/service.contract.dream";
+import Header from "./components/ui/Header";
 
 function DreamChainLanding() {
-
-
-  const  readContract = async (e: React.FormEvent) => {
-    const contract = new DreamDeployed();
-    //const writeVal = await contract.write(10, '0x6fB7A455a6b6d53371B311Dbf4c319f3F2B7F53e');
-    //console.log (" Val write: ", writeVal)
-    const readva = await contract.read('0x6fB7A455a6b6d53371B311Dbf4c319f3F2B7F53e');
-    console.log("val read: ",readva);
-
-  }
-
   
   return (
     <div className="min-h-screen flex flex-col bg-gray-100">
-      <header className="py-6 px-4 border-b bg-white">
-        <div className="container mx-auto flex justify-between items-center">
-          <div className="flex items-center space-x-2">
-            <Button onClick={readContract}> Read Contract</Button>
-            <Image
-              src="/logo.png"
-              alt="Logo de DreamChain"
-              width={70}
-              height={70}
-              className="rounded-full"
-            />
-            <span className="text-2xl font-bold">DreamChain</span>
-          </div>
-          <nav className="hidden md:flex space-x-4">
-            <Link href="/" className="px-4 py-2 text-lg font-medium rounded-md hover:bg-gray-100">
-              Inicio
-            </Link>
-            <Link
-              href="how-it-works"
-              className="px-4 py-2 text-lg font-medium rounded-md hover:bg-gray-100"
-            >
-              Cómo funciona
-            </Link>
-            <Link
-              href="user-profile"
-              className="px-4 py-2 text-lg font-medium rounded-md hover:bg-gray-100"
-            >
-              Perfil
-            </Link>
-          </nav>
-        </div>
-      </header>
+      <Header></Header>
 
       <main className="flex-grow">
         {/* Hero Section */}

@@ -30,7 +30,7 @@ export default function HowItWorks() {
             <Link href="how-it-works" className="px-4 py-2 text-lg font-medium rounded-md hover:bg-gray-100">
               Cómo funciona
             </Link>
-            <Link href="user-dashboard" className="px-4 py-2 text-lg font-medium rounded-md hover:bg-gray-100">
+            <Link href="user-profile" className="px-4 py-2 text-lg font-medium rounded-md hover:bg-gray-100">
               Perfil
             </Link>
           </nav>
