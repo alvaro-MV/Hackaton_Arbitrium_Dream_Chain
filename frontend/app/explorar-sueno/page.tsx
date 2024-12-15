@@ -8,7 +8,7 @@ import { Progress } from "@/components/ui/progress";
 import Link from "next/link";
 import Image from "next/image";
 import { Dream } from "../interface/interface.formdata";
-import { LocalStorageService } from "../storage/storage.dream";
+import { LocalStorageService, StorageService } from "../storage/storage.dream";
 import { useEffect, useState } from "react";
 
 export default function PublicDreams() {
@@ -22,7 +22,7 @@ export default function PublicDreams() {
     goal_amount: 4,
     donated_amount: 1
     }]);
-  const sotorage = new LocalStorageService();
+  const sotorage: StorageService = new LocalStorageService();
 
   useEffect(() => {
     const dreams = sotorage.getDreams();

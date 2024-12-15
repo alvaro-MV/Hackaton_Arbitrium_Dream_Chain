@@ -34,42 +34,6 @@ export default function UserDashboard() {
 
   return (
     <div className="flex h-screen bg-gray-100">
-      {/* Sidebar */}
-      <Sidebar>
-        <SidebarHeader>
-          <div className="flex items-center space-x-2">
-            <Image
-              src="/logo.png"
-              alt="DreamChain Logo"
-              width={40}
-              height={40}
-              className="rounded-full"
-            />
-            <span className="text-lg font-bold">DreamChain</span>
-          </div>
-        </SidebarHeader>
-        <SidebarContent>
-          <SidebarMenu>
-            <SidebarMenuItem href="/user-dashboard">
-              <button className="w-full px-4 py-2 text-black rounded-md">
-                Mis Sueños
-              </button>
-            </SidebarMenuItem>
-            <SidebarMenuItem href="/user-profile">
-              <button className="w-full px-4 py-2 text-black rounded-md">
-                Cuenta
-              </button>
-            </SidebarMenuItem>
-          </SidebarMenu>
-          <div className="mt-auto p-4">
-            <Link href="/">
-              <button className="w-full px-4 py-2 text-white bg-black rounded-md hover:bg-black hover:text-white transition">
-                Volver al Inicio
-              </button>
-            </Link>
-          </div>
-        </SidebarContent>
-      </Sidebar>
 
       {/* Main Content */}
       <div className="flex-1 flex flex-col">

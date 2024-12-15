@@ -50,7 +50,7 @@ function DreamChainLanding() {
               Cómo funciona
             </Link>
             <Link
-              href="user-dashboard"
+              href="user-profile"
               className="px-4 py-2 text-lg font-medium rounded-md hover:bg-gray-100"
             >
               Perfil

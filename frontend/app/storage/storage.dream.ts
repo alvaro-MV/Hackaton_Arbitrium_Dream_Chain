@@ -2,7 +2,6 @@ import { randomUUID } from "crypto";
 import { Dream } from "../interface/interface.formdata";
 
 
-
 export interface StorageService {
 	saveDream(user: Dream): void;
 	findDreamById(id: string): Dream | null;

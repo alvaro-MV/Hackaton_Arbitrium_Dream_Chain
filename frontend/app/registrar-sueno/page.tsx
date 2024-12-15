@@ -6,7 +6,7 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Input } from "../components/ui/input";
 import { Button } from "../components/ui/button";
 import { Label } from "../components/ui/label";
-import { Upload, Target, Gift, Sparkles } from "lucide-react";
+import { Upload, Target, Gift, Sparkles, Loader } from "lucide-react";
 import Footer from "@/components/ui/footer";
 import Image from "next/image";
 import Link from "next/link";
@@ -17,8 +17,10 @@ import { Dream } from "../interface/interface.formdata";
 
 export default function DreamRegistryForm() {
   const sotorage = new LocalStorageService();
-  const dreamDeployed = new DreamDeployed();
   const router = useRouter(); // Hook para manejar la navegación
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
+  const [deploying, setDeploying] = useState(false);
 
   const [dreamForm, setDreamForm] = useState<Dream>({
     name_dream: "",
@@ -44,7 +46,18 @@ export default function DreamRegistryForm() {
     e.preventDefault();
 
     const deploy = new DeployDream();
-    const contractAddress = await deploy.deployContractMetaMask();
+    let contractAddress = null;
+    setLoading(true);
+    contractAddress = await deploy.deployContractMetaMask();
+    if (!contractAddress){
+        setError(true);
+        setLoading(false);
+        console.error("Error: deploy contract");
+        return ;
+    }
+    setLoading(false);
+    setDeploying(true);
+
     //const data = await dreamDeployed.write(30);
     dreamForm.contract = contractAddress;
     dreamForm.goal_amount = 100;
@@ -187,8 +200,16 @@ export default function DreamRegistryForm() {
               className="w-full text-lg py-6"
               size="lg"
               onClick={handleSubmit}
+              disabled={loading}
             >
-              Registrar en Blockchain
+              {loading ? (
+              <div className="flex items-center justify-center">
+                <Loader className="animate-spin text-white" />
+                <span className="ml-2">Cargando...</span>
+              </div>
+              ) : (
+              "Registrar en Blockchain"
+              )}
             </Button>
           </CardContent>
         </Card>
