@@ -1,6 +1,7 @@
 import path from "path";
-import sqlite3 from "sqlite3";
+//import sqlite3 from "sqlite3";
 
+/*
 const dbPath = path.join(process.cwd(), "formdata.db");
 export const db = new sqlite3.Database(
  dbPath,
@@ -12,9 +13,12 @@ export const db = new sqlite3.Database(
   console.log("Connected to the profile database.");
  }
 );
+*/
 
 
   export const find = async (query: string) => {
+	return Promise.resolve([]);
+	/*
 	return await new Promise((resolve, reject) => {
 	 db.all(query, (err: Error, row) => {
 	  if (err) {
@@ -24,9 +28,12 @@ export const db = new sqlite3.Database(
 	  return resolve(row);
 	 });
 	});
+	*/
    };
    
    export const save = async (query: string, values: string[]) => {
+	return Promise.resolve();
+	/*
 	return await new Promise((resolve, reject) => {
 	 db.run(query, values, function (err) {
 	  if (err) {
@@ -36,4 +43,5 @@ export const db = new sqlite3.Database(
 	  resolve(null);
 	 });
 	});
+	*/
    };

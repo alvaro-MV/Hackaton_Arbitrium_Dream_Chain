@@ -1,4 +1,4 @@
-
+/*
 import { db } from "./form-data-db";
 
 export const migrateformdata = () => {
@@ -51,3 +51,4 @@ export const migrateformdata = () => {
 	});
   };
   
+*/
