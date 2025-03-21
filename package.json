@@ -14,12 +14,12 @@
     "better-sqlite3": "^11.7.0",
     "browserify-fs": "^1.0.0",
     "fs": "^0.0.1-security",
-    "viem": "^2.21.54"
+    "viem": "^2.21.54",
+    "dotenv": "^16.4.7"
   },
   "devDependencies": {
     "@types/better-sqlite3": "^7.6.12",
     "@types/node": "^22.10.1",
-    "dotenv": "^16.4.7",
     "typescript": "^5.7.2"
   }
 }
