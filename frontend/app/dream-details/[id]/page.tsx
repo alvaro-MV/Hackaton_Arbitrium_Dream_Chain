@@ -6,7 +6,7 @@ import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
 import Link from "next/link";
-import { useParams, usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Donor, Dream, Mentor } from "@/app/interface/interface.formdata";
 import { LocalStorageService } from "@/app/storage/storage.dream";
@@ -69,10 +69,8 @@ export default function DreamDetailsPage() {
 				console.log(`Result: ${result}`);
 				//Debe llamar a un cuestionario para hacer la donacion.
 				const names = ["Alice", "Bob", "Charlie", "Diana", "Eve"];
-		
 				// Seleccionar aleatoriamente un nombre y una dirección
 				const randomName = names[Math.floor(Math.random() * names.length)];
-		
 				// Generar un monto aleatorio entre 0 y 1000
 				const randomMount = Math.floor(Math.random() * dreams.goal_amount);
 		
@@ -82,9 +80,6 @@ export default function DreamDetailsPage() {
 					address: result,
 					amount: randomMount,
 				};
-				const value_total = await dreamService.read(dreams.contract);
-
-				console.log(value_total);
 				setFormDreams((prevDreams) => {
 					const updatedDreams = {
 						...prevDreams,

@@ -21,7 +21,7 @@ export class DreamDeployed {
 		]);
 	
 		// Obtener la clave privada del entorno
-		const account = privateKeyToAccount('0x09cdbafe5f8ae4054f602c3c6113768c84ad9f0eae54abf88c17ea7aff510be1')
+		const account = privateKeyToAccount('0x7d316c484191cf49b45edebfc8e75c558c670fa952f45635e42cffe00691fda3')
 	
 		// Crear un cliente para interactuar con el contrato (escritura)
 		this.client = createWalletClient({
@@ -37,7 +37,7 @@ export class DreamDeployed {
 		});
 	
 		// Dirección del contrato (obtenida de las variables de entorno)
-		this.CONT_ADD = '0x8E3DC5098C7b97848F8667E9efFAaa242D2B352e';
+		this.CONT_ADD = '0x5c23001dea064900e2d1182a4cbca4dc705c5ffe';
 	}
 
 	// Función para escribir en el contrato (escribir un valor)
@@ -62,7 +62,7 @@ export class DreamDeployed {
 		try {
 			const result = await this.publicClient.readContract({
 			abi: this.ABI,
-			address: cont_add? cont_add : this.CONT_ADD,
+			address: cont_add? cont_add: this.CONT_ADD,
 			functionName: "get_value",
 			});
 			console.log(`Contract read result: ${result}`);

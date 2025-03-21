@@ -1,7 +1,10 @@
 import { Numeric } from "ethers";
 
-export interface Contract {
-	dir_contract: string
+export interface TransactionContract {
+	hash: string;
+	from: string;
+	contractAddress: string;
+	blockHash: string;
 }
 
 export interface Transactions {
@@ -29,6 +32,7 @@ export interface Dream {
 	contract: string;
 	goal_amount : number;
 	donated_amount: number;
+	tracontract?: TransactionContract;
 	donors?: Donor[];
 	mentors?: Mentor[];
   }

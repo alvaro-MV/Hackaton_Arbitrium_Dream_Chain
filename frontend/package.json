@@ -9,12 +9,15 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@rainbow-me/rainbowkit": "^2.2.1",
     "ethers": "^6.13.4",
     "lucide-react": "^0.468.0",
     "next": "15.0.4",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "sqlite3": "^5.1.7"
+    "sqlite3": "^5.1.7",
+    "tailwind-merge": "^2.5.5",
+    "wagmi": "^2.13.4"
   },
   "devDependencies": {
     "@types/node": "^20",

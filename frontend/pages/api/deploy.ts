@@ -6,10 +6,14 @@ import { ethers } from "ethers";
 
  export default async function handler(req: NextApiRequest, res: NextApiResponse) {
 	const ARBITRUM_RPC = 'https://sepolia-rollup.arbitrum.io/rpc';
-	const PRIVATE_KEY = '0x7d316c484191cf49b45edebfc8e75c558c670fa952f45635e42cffe00691fda3';
+	const PRIVATE_KEY = '7d316c484191cf49b45edebfc8e75c558c670fa952f45635e42cffe00691fda3';
 
 	if (req.method === "POST") {
+
 		try {
+			const { address } = req.body;
+
+			console.log("Address:", address);
 		  // Construir la ruta al archivo
 		  const filePath = path.join(process.cwd(),'data', 'contract.wasm');
 		  const contractWasm = fs.readFileSync(filePath);
@@ -24,8 +28,12 @@ import { ethers } from "ethers";
 		  });
 
 		  const receipt = await tx.wait();
-	
-		  res.status(200).json({ contractAddress: receipt?.contractAddress });
+		  res.status(200).json({ 
+			hash: receipt?.hash,
+			from: receipt?.from,
+			contractAddress: receipt?.contractAddress,
+			blockHash: receipt?.blockHash
+		   });
 		} catch (error) {
 		  console.error("Error durante el despliegue:", error);
 		  res.status(500).json({ error: error });

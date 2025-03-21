@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import Image from "next/image";
 import { ethers } from "ethers";
+import { LocalStorageService } from "../storage/storage.dream";
 
 export default function UserDashboard() {
   // Estado para manejar la cuenta conectada
@@ -23,6 +24,7 @@ export default function UserDashboard() {
         });
         // Asigna la cuenta conectada al estado
         setAccount(accounts[0]);
+        localStorage.setItem('user', accounts);
       } catch (error) {
         console.error("Error conectando con MetaMask:", error);
       }
