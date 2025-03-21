@@ -17,7 +17,9 @@
     "react-dom": "^19.0.0",
     "sqlite3": "^5.1.7",
     "tailwind-merge": "^2.5.5",
-    "wagmi": "^2.13.4"
+    "wagmi": "^2.13.4",
+    "fs": "^0.0.1-security",
+    "viem": "^2.21.54"
   },
   "devDependencies": {
     "@types/node": "^20",

@@ -53,11 +53,6 @@ ArbResult get_value(uint8_t *input, size_t len)
   return _return_success_bebi32(buf_out);
 }
 
-ArbResult hello_world(uint8_t *input, size_t len)
-{
-  return _return_short_string(Success, "Hijo de los palotes\n");
-}
-
 int handler(size_t argc)
 {
   // Save the function calldata
