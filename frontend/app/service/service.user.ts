@@ -5,7 +5,7 @@ import { SessionService } from "./service.session";
 export class UserService {
   static async getUserDetails(): Promise<object | null> {
     const session = SessionService.getSession();
-    if (!session.token) {
+    if (session == null || !session.token) {
       throw new Error("User is not logged in");
     }
 

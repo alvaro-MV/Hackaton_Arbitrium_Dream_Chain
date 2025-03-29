@@ -4,7 +4,7 @@ import { db } from "./form-data-db";
 export const migrateformdata = () => {
 	db.serialize(() => {
 	  // Verificamos si la tabla 'articles' ya tiene registros
-	  db.get("SELECT COUNT(*) AS count FROM form_data", (err, row) => {
+	  db.get("SELECT COUNT(*) AS count FROM form_data", (err: any, row: any) => {
 
 		// Si ya hay datos (count > 0), no hacemos nada
 		if (!err && row.count > 0) {

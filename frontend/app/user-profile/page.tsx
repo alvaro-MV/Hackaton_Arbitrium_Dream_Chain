@@ -9,20 +9,16 @@ import Image from "next/image";
 import { AuthService } from "../service/service.auth";
 import { useEffect, useState } from "react";
 import { SessionService } from "../service/service.session";
-import { Loader, Router } from "lucide-react";
+import { Loader } from "lucide-react";
 import { useRouter } from "next/navigation";
 
-export interface User {
+interface User {
   password?: string,
   email: string,
   user: string,
 }
 
-export enum LoginError {
-  INVALID_CREDENTIAL,
-  NOTFOUND_USER,
-  SERVER_ERROR
-}
+
 export default function UserProfile() {
   const [loading, setLoading] = useState(false);
   const [loged, setLoged] = useState(false);
